@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet,
     View,
@@ -50,6 +50,28 @@ const Home = (props) => {
     ]);
     const [modalOpen, setModalOpen] = useState(false);
 
+    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+        'keyboardDidShow',
+            () => {
+                setKeyboardVisible(true); // or some other action
+            }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+        'keyboardDidHide',
+            () => {
+                setKeyboardVisible(false); // or some other action
+            }
+        );
+
+        return () => {
+            keyboardDidHideListener.remove();
+            keyboardDidShowListener.remove();
+        };
+    }, []);
+
     const openReviewDetails = (detail) => {
         navigation.navigate('ReviewDetails', detail);
     };
@@ -68,12 +90,17 @@ const Home = (props) => {
         } );
 
         setModalOpen(false);
+    };
+
+    const toggleKeyboard = () => {
+        console.log(isKeyboardVisible);
+        if(isKeyboardVisible) Keyboard.dismiss();
     }
     
     return (
         <View style={styles.container}>
             <Modal visible={modalOpen}>
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <TouchableWithoutFeedback onPress={toggleKeyboard}>
                     <View style={customStyles.modalContent}>
                         <MaterialIcons 
                             name="close"

@@ -18,7 +18,7 @@ function Header(props) {
     return (
         <View style={styles.header}>
             {/* Icon for the menu */}
-            <MaterialIcons name="menu" size={28} onPress={openMenu} style={styles.icon}></MaterialIcons>
+            <MaterialIcons name="menu" size={28} onPress={openMenu} style={styles.icon} />
             
             <View style={styles.headerTitle}>
                 <Image style={styles.headerImage} source={require('../assets/images/heart_logo.png')} />
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 16,
         color: '#fff',
+        zIndex: 5
         // color: '#333'
     },
     headerImage: {

@@ -44,7 +44,9 @@ const ReviewDetails = (props) => {
                 <Text> {body} </Text>
                 <View style={customStyles.rating}>
                     <Text> GameZone Rating: </Text>
-                    <Image source={currentRatingImage} />
+                    <Image style={{
+                        maxWidth: 100
+                    }} source={currentRatingImage} />
                 </View>
                 {/* <Text style={styles.titleText}> {rating} </Text> */}
             </Card>
